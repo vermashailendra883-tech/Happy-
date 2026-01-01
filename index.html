@@ -1,297 +1,254 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Radhe Radhe - Happy New Year 2026</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+<!-- स्क्रीनशॉट टूल -->
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
-    <meta property="og:title" content="🦚 Radhe Radhe! Naye Saal Ki Shubhkamnayein">
-    <meta property="og:description" content="Mere taraf se apke liye ek khas surprise. Click karke dekhein.">
+<style>
+    :root { --saffron: #FF9933; --maroon: #800000; --gold: #FFD700; --cream: #fff5e6; }
     
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #FF9933, #FFCC00);
-            overflow-x: hidden;
-            text-align: center;
-            user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
+    body {
+        margin: 0; padding: 0;
+        font-family: 'Tiro Devanagari Hindi', serif;
+        background: radial-gradient(circle, #ffcc80, #ff9933, #e65100);
+        min-height: 100vh;
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        overflow-x: hidden;
+    }
 
-        /* --- Falling Flowers --- */
-        .flower {
-            position: fixed;
-            top: -10%;
-            font-size: 20px;
-            animation: fall linear infinite;
-            z-index: 1;
-            opacity: 0.6;
-            pointer-events: none;
-        }
-        @keyframes fall {
-            0% { top: -10%; transform: translateX(0) rotate(0deg); }
-            100% { top: 110%; transform: translateX(50px) rotate(360deg); }
-        }
+    /* --- CAPTURE WRAPPER --- */
+    .capture-area {
+        position: relative;
+        width: 100%;
+        max-width: 420px;
+        padding: 5px;
+        display: flex; justify-content: center;
+    }
 
-        /* --- Welcome Screen --- */
-        #welcomeScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            color: white;
-            transition: opacity 0.8s ease;
-        }
+    .card {
+        background: #fff;
+        width: 100%;
+        border: 4px solid var(--gold);
+        border-radius: 15px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(139, 0, 0, 0.5);
+    }
 
-        .enter-btn {
-            background: linear-gradient(45deg, #ff512f, #dd2476);
-            border: 3px solid #fff;
-            color: white;
-            padding: 15px 40px;
-            font-size: 22px;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 20px;
-            animation: pulse 1s infinite;
-            font-weight: bold;
-            box-shadow: 0 0 25px rgba(255, 87, 34, 0.8);
-            outline: none;
-        }
+    .top-decor { font-size: 35px; color: var(--saffron); margin-top: -10px; }
+    h1 { font-family: 'Rozha One', serif; color: var(--maroon); font-size: 26px; margin: 5px 0; }
+    .year { font-size: 45px; background: linear-gradient(to right, #ff512f, #dd2476); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; }
+    
+    .wishes-text {
+        background: var(--cream); color: #d84315; padding: 10px;
+        border-radius: 8px; font-weight: bold; font-size: 15px;
+        margin: 10px 0; border-left: 5px solid var(--saffron);
+    }
 
-        /* --- Main Card --- */
-        .container {
-            display: none;
-            position: relative;
-            z-index: 10;
-            max-width: 450px;
-            margin: 15px auto;
-            background: #fff;
-            border-radius: 20px;
-            padding: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            border: 4px solid #ff9900;
-            animation: popUp 0.5s ease-out;
-        }
-        
-        @keyframes popUp {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
+    /* --- PHOTO FRAME --- */
+    .photo-frame {
+        width: 100%; height: 320px;
+        background-color: #000;
+        border: 4px double var(--gold);
+        border-radius: 10px;
+        margin: 10px 0;
+        overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    #userPhoto { width: 100%; height: 100%; object-fit: contain; }
 
-        .header-title {
-            color: #d35400;
-            font-size: 28px;
-            margin: 5px 0;
-            text-shadow: 1px 1px 0px #ffeebb;
-            font-weight: bold;
-        }
+    /* --- LINK VISIBLE IN PHOTO --- */
+    .link-watermark {
+        background: #000; color: #fff;
+        font-size: 12px; padding: 5px 10px;
+        border-radius: 20px; margin-top: 10px;
+        display: inline-block;
+        font-family: sans-serif;
+        border: 1px solid var(--gold);
+    }
 
-        .radhe-text {
-            font-size: 22px;
-            color: #c0392b;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+    /* --- CONTROLS --- */
+    .controls-area {
+        width: 90%; max-width: 400px;
+        margin-top: 15px; text-align: center; z-index: 20;
+        padding-bottom: 20px;
+    }
 
-        .sub-text {
-            color: #8e44ad;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
+    .file-btn {
+        background: var(--maroon); color: white; padding: 10px 25px;
+        border-radius: 50px; cursor: pointer; font-size: 14px;
+        display: inline-block; box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
 
-        /* --- Photo Frame --- */
-        .photo-box {
-            width: 100%;
-            height: 350px;
-            background-color: #fff3e0;
-            border: 2px dashed #ef6c00;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 15px auto;
-            overflow: hidden;
-            position: relative;
-        }
+    .share-btn {
+        background: #25D366; color: white; border: none; width: 100%; padding: 15px;
+        font-size: 18px; font-weight: bold; border-radius: 8px;
+        cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3); margin-top: 15px;
+        animation: pulse 2s infinite;
+    }
 
-        #userImage {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: none;
-        }
+    #loading { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; color:white; text-align:center; padding-top:40vh; font-size:18px; }
 
-        /* --- Buttons --- */
-        .upload-btn {
-            background: #ff9800;
-            color: white;
-            width: 90%;
-            padding: 12px;
-            border-radius: 30px;
-            border: none;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
+    .ad-box { background:#f4f4f4; padding:2px; margin-top:5px; border:1px dashed #ccc; display:flex; justify-content:center; }
+    #bgCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
-        .whatsapp-btn {
-            background: linear-gradient(45deg, #25D366, #128C7E);
-            color: white;
-            text-decoration: none;
-            display: block;
-            width: 90%;
-            margin: 10px auto;
-            padding: 12px;
-            border-radius: 30px;
-            font-size: 18px;
-            font-weight: bold;
-            animation: bounce 2s infinite;
-        }
-
-        .ad-box {
-            background-color: #f4f4f4;
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 10px;
-            border: 1px dashed #ccc;
-            text-align: center;
-            min-height: 50px;
-        }
-
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-5px);} 60% {transform: translateY(-3px);} }
-    </style>
+</style>
 </head>
-<body>
+<body onclick="playAudio()">
 
-    <!-- 1. ENTRY GATE -->
-    <div id="welcomeScreen">
-        <h1 style="color: #ffcc00; font-size: 30px;">🕉️ Radhe Radhe 🕉️</h1>
-        <p>Aapke liye ek surprise hai...</p>
-        <button class="enter-btn" onclick="startExperience()">
-            🎁 Khol Kar Dekhein
-        </button>
-    </div>
-
-    <!-- 2. MAIN CARD -->
-    <div class="container" id="mainContent">
-        
-        <div style="font-size: 40px;">🦚</div>
-        <div class="radhe-text">Radhe Radhe!</div>
-        <div class="header-title">Happy New Year 2026</div>
-        <p class="sub-text">Mere aur mere parivar ki taraf se aapko hardik shubhkamnayein.</p>
-        
-        <div class="photo-box" onclick="document.getElementById('fileInput').click()">
-            <span style="color:#e65100; font-weight:bold;" id="placeholderText">📸 Photo Lagane ke liye<br>yahan click karein</span>
-            <img id="userImage" src="" alt="User Photo">
-        </div>
-
-        <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="loadFile(event)">
-        
-        <button class="upload-btn" onclick="document.getElementById('fileInput').click()">
-            🖼️ Apni Photo Lagayein
-        </button>
-
-        <a href="#" class="whatsapp-btn" onclick="shareToWhatsApp()">
-            📲 WhatsApp Par Share Karein
-        </a>
-
-        <!-- ADSTERRA CODE -->
-        <div class="ad-box">
-             <script async="async" data-cfasync="false" src="https://pl28206752.effectivegatecpm.com/290a2b7159a888a7b16d7f394fcbae8a/invoke.js"></script>
-            <div id="container-290a2b7159a888a7b16d7f394fcbae8a"></div>
-        </div>
-
-        <div style="font-size: 10px; color: #888; margin-top: 10px;">
-            Dharmic Shubhkamnayein 2026
-        </div>
-    </div>
-
-    <!-- AUDIO PLAYER (Preload Added) -->
-    <!-- Dhyan rakhein file ka naam 'song.mp3' hi hona chahiye -->
-    <audio id="bgMusic" preload="auto" loop>
-        <source src="song.mp3" type="audio/mp3">
+    <audio id="bgMusic" loop>
+        <source src="wishes.mp3" type="audio/mp3">
     </audio>
+    <canvas id="bgCanvas"></canvas>
 
-    <script>
-        var music = document.getElementById("bgMusic");
+    <div id="loading">
+        <div style="font-size:40px;">🔄</div>
+        <br>कृपया प्रतीक्षा करें...<br>WhatsApp खुल रहा है...
+    </div>
 
-
-        // Flowers Animation
-        function createFlowers() {
-            const flowerEmojis = ['🌸', '🌹', '🌺', '🌼', '🦚', '🕉️'];
-            setInterval(() => {
-                const flower = document.createElement('div');
-                flower.classList.add('flower');
-                flower.innerText = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
-                flower.style.left = Math.random() * 100 + 'vw';
-                flower.style.animationDuration = Math.random() * 3 + 2 + 's';
-                document.body.appendChild(flower);
-                setTimeout(() => { flower.remove(); }, 5000);
-            }, 300);
-        }
-
-        // Start Experience & Play Music
-        function startExperience() {
-            var welcome = document.getElementById("welcomeScreen");
-            var main = document.getElementById("mainContent");
-
-            // 1. Pehle music play karein (Browser interaction ke turant baad)
-            music.volume = 1.0; 
-            var playPromise = music.play();
-
-            if (playPromise !== undefined) {
-                playPromise.then(_ => {
-                    console.log("Audio started successfully");
-                })
-                .catch(error => {
-                    console.log("Audio play failed:", error);
-                    alert("Music play nahi ho pa raha. Kripya check karein ki 'song.mp3' file sahi folder mein hai.");
-                });
-            }
-
-            // 2. Animation shuru karein
-            createFlowers(); 
-
-            // 3. Screen change karein
-            welcome.style.opacity = '0';
-            setTimeout(() => {
-                welcome.style.display = 'none';
-                main.style.display = 'block';
-            }, 800);
-        }
-
-        // Photo Load Logic
-        function loadFile(event) {
-            var image = document.getElementById('userImage');
-            var placeholder = document.getElementById('placeholderText');
-            if (event.target.files && event.target.files[0]) {
-                image.src = URL.createObjectURL(event.target.files[0]);
-                image.style.display = 'block';
-                placeholder.style.display = 'none';
-            }
-        }
-
-        // WhatsApp Share Logic
-        function shareToWhatsApp() {
-            var websiteLink = window.location.href; 
-            var message = `🦚 *Radhe Radhe!* 🦚\n\n` + 
-                          `Mere aur mere parivar ki taraf se aapko *Naye Saal 2026* ki hardik shubhkamnayein.\n` +
-                          `🕉️ Maine aapke liye kuch khas bheja hai, photo dekhne ke liye niche link par click karein:\n👇👇\n`;
+    <!-- ===== CARD (Photo Area) ===== -->
+    <div class="capture-area" id="cardToShare">
+        <div class="card">
+            <div class="top-decor">🕉️ ✨ 🕉️</div>
+            <h1>नव वर्ष की शुभकामनाएं<br><span class="year">2026</span></h1>
             
-            var finalURL = `whatsapp://send?text=${encodeURIComponent(message + websiteLink)}`;
-            window.location.href = finalURL;
+            <div class="wishes-text">
+                "आपको और आपके पूरे परिवार को<br>
+                नए साल की हार्दिक शुभकामनाएं।"<br>
+                🙏 जय श्री राम 🙏
+            </div>
+
+            <!-- PHOTO -->
+            <div class="photo-frame">
+                <img id="userPhoto" src="https://cdn-icons-png.flaticon.com/512/8802/8802672.png" crossorigin="anonymous" alt="Photo">
+            </div>
+
+            <!-- AD 1 (Inside Photo) -->
+            <div class="ad-box">
+                <script>
+                    atOptions = { 'key' : '4acc0331fedb6a2050fa6fc5179175d7', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
+                </script>
+                <script type="text/javascript" src="https://www.highperformanceformat.com/4acc0331fedb6a2050fa6fc5179175d7/invoke.js"></script>
+            </div>
+
+            <!-- Link Visual -->
+            <div class="link-watermark">
+                Create Here: happy-new-year-2026-livid.vercel.app
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="controls-area">
+        <label class="file-btn">
+            📸 फोटो बदलें
+            <input type="file" style="display:none" accept="image/*" onchange="uploadImage(event)">
+        </label>
+
+        <!-- SHARE BUTTON -->
+        <button class="share-btn" onclick="shareCard()">
+            🚀 WhatsApp पर भेजें (Link + Photo)
+        </button>
+        
+        <!-- AD 2 (Outside) -->
+        <div class="ad-box" style="margin-top:15px;">
+            <script async="async" data-cfasync="false" src="https://pl28208324.effectivegatecpm.com/2d3e3e20d096ece9151df243cb876ebf/invoke.js"></script>
+            <div id="container-2d3e3e20d096ece9151df243cb876ebf"></div>
+        </div>
+    </div>
+
+<script>
+    const audio = document.getElementById('bgMusic');
+    window.onload = function() { initAnimation(); }
+    function playAudio() { if(audio.paused) audio.play(); }
+
+    function uploadImage(event) {
+        const file = event.target.files[0];
+        if(file){
+            const reader = new FileReader();
+            reader.onload = function(e){
+                document.getElementById('userPhoto').src = e.target.result;
+                playAudio();
+            }
+            reader.readAsDataURL(file);
         }
-    </script>
+    }
+
+    /* MAGIC SHARE LOGIC */
+    async function shareCard() {
+        const loading = document.getElementById('loading');
+        loading.style.display = 'block';
+
+        try {
+            // 1. Create Image
+            const canvas = await html2canvas(document.getElementById('cardToShare'), {
+                scale: 2, backgroundColor: null, useCORS: true
+            });
+
+            canvas.toBlob(async (blob) => {
+                const file = new File([blob], "HappyNewYear2026.png", { type: "image/png" });
+
+                // 2. CREATE PERFECT LINK MESSAGE
+                // \n का मतलब है नई लाइन। हमने लिंक के ऊपर और नीचे जगह दी है।
+                const myLink = "https://happy-new-year-2026-livid.vercel.app";
+                const shareText = `✨ मेरी फोटो के साथ नए साल की बधाई देखें! 👇\n\n🔗 अपना कार्ड यहाँ बनायें:\n${myLink}\n\n👆 लिंक पर क्लिक करें 👆`;
+
+                // 3. SHARE
+                if (navigator.share) {
+                    try {
+                        await navigator.share({
+                            files: [file],
+                            title: 'Happy New Year',
+                            text: shareText // यह लिंक WhatsApp कैप्शन में जायेगा
+                        });
+                    } catch (err) {
+                        console.log("Share closed");
+                    }
+                } else {
+                    alert("Sharing not supported. Downloading image...");
+                    const link = document.createElement('a');
+                    link.download = 'Wishes.png';
+                    link.href = canvas.toDataURL();
+                    link.click();
+                }
+                loading.style.display = 'none';
+            }, 'image/png');
+
+        } catch (error) {
+            console.error(error);
+            loading.style.display = 'none';
+        }
+    }
+
+    /* ANIMATION */
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    let particles = [];
+    const colors = ['#FF9933', '#FFD700', '#fff'];
+    
+    function initAnimation(){
+        for(let i=0; i<50; i++) particles.push({
+            x: Math.random()*canvas.width, y: Math.random()*-canvas.height,
+            size: Math.random()*5+3, speed: Math.random()*2+1,
+            color: colors[Math.floor(Math.random()*colors.length)]
+        });
+        animate();
+    }
+    function animate(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p=>{
+            ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x,p.y,p.size,0,Math.PI*2); ctx.fill();
+            p.y+=p.speed; if(p.y>canvas.height) p.y=-10;
+        });
+        requestAnimationFrame(animate);
+    }
+</script>
+
 </body>
-</html><source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
+</html>
